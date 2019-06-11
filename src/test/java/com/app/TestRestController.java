@@ -5,12 +5,17 @@ import java.net.URI;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
+
+import com.app.controller.TestController;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -19,10 +24,15 @@ public class TestRestController {
 	@LocalServerPort
 	int randomServerPort;
 
+	@InjectMocks
+	private TestController testController;
+
+	@Autowired
+	private TestRestTemplate restTemplate;
+
 	@Test
 	public void helloMsgTests() throws Exception {
 
-		RestTemplate restTemplate = new RestTemplate();
 		final String baseUrl = "http://localhost:" + randomServerPort + "/sample/hello";
 		URI uri = new URI(baseUrl);
 
