@@ -17,9 +17,9 @@ public class TestController {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestController.class);
 
-	@GetMapping("/msg")
-	public String msg() {
-		logger.info("Inside msg() method ");
+	@GetMapping("/hello")
+	public String helloMsg() {
+		logger.info("Inside helloMsg() method ");
 		return "Hello World !";
 	}
 
